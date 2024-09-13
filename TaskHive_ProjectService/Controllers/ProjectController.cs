@@ -19,11 +19,10 @@ namespace TaskHive_ProjectService.Controllers{
         }
 
         [HttpGet("GetProjectList")]
-        public IActionResult GetProjectList()
+        public async Task<IActionResult> GetProjectListAsync()
         {
-            var projectList = _projectService.GetProjectListAsync();
-            var json = JsonSerializer.Serialize(projectList);
-            return new JsonResult(json);
+            var projectList = await _projectService.GetProjectListAsync();
+            return Ok(projectList);
         }
     }
 }
