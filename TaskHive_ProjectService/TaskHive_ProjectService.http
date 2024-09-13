@@ -1,0 +1,6 @@
+@TaskHive_ProjectService_HostAddress = http://localhost:5269
+
+GET {{TaskHive_ProjectService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
