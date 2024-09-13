@@ -1,4 +1,5 @@
 using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
 using TaskHive_ProjectService.Models.Data;
 using TaskHive_ProjectService.Repositories.Interface;
 
@@ -16,9 +17,9 @@ public class ProjectRepository : IProjectRepository
         
     }
 
-    public List<ProjectDataModel> GetProjectListAsync()
+    public async Task<List<ProjectDataModel>> GetProjectListAsync()
     {
-        var projectList = _db.Projects.ToList();
+        var projectList = await _db.Projects.ToListAsync();
         return projectList;
     }
 }

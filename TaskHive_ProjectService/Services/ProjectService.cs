@@ -18,9 +18,9 @@ public class ProjectService : IProjectService
         _projectRepository.AddProject(project);
     }
 
-    public List<ProjectDataModel> GetProjectListAsync()
+    public async Task<List<ProjectDataModel>> GetProjectListAsync()
     {
-        var projectList = _projectRepository.GetProjectListAsync();
+        var projectList = await _projectRepository.GetProjectListAsync();
         return projectList;
     }
 }
