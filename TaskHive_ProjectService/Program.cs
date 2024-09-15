@@ -16,14 +16,14 @@ builder.Services.AddSwaggerGen();
 var configuration = builder.Configuration;
 
 // ----- Azure Production -----
-var azureConnectionString = Environment.GetEnvironmentVariable("AzureSQLConnection");
+//var azureConnectionString = Environment.GetEnvironmentVariable("AzureSQLConnection");
 
-builder.Services.AddDbContext<TaskHive_ProjectService.AppDbContext>( options =>
-    options.UseSqlServer(azureConnectionString));
+//builder.Services.AddDbContext<TaskHive_ProjectService.AppDbContext>( options =>
+//    options.UseSqlServer(azureConnectionString));
 
 // ----- Local Development -----
-//builder.Services.AddDbContext<TaskHive_ProjectService.AppDbContext>(options =>
-//    options.UseSqlServer(configuration.GetConnectionString("AzureSQLConnection")));
+builder.Services.AddDbContext<TaskHive_ProjectService.AppDbContext>(options =>
+    options.UseSqlServer(configuration.GetConnectionString("DockerSQLConnection")));
 
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
