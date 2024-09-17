@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace TaskHive_ProjectService.Migrations
 {
     /// <inheritdoc />
-    public partial class ProjectsTable : Migration
+    public partial class initial_migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +21,12 @@ namespace TaskHive_ProjectService.Migrations
                     Department = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Team = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Manager = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumberOfMembers = table.Column<int>(type: "int", nullable: false)
+                    NumberOfMembers = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteUser = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
