@@ -18,7 +18,7 @@ namespace TaskHive_ProjectService.Controllers{
             _projectService = projectService;
         }
 
-        [HttpGet("getProjectListAsync")]
+        [HttpGet("get-project-list")]
         public async Task<IActionResult> GetProjectListAsync()
         {
             var projectList = await _projectService.GetProjectListAsync();
