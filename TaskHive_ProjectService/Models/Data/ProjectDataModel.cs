@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using TaskHive_ProjectService.Enums;
 
 namespace TaskHive_ProjectService.Models.Data
 {
@@ -7,16 +8,19 @@ namespace TaskHive_ProjectService.Models.Data
         [Key]
         public int Id {get; set;}
         [Required]
-        public required string ProjectName {get; set;}
+        public required string Name {get; set;}
+        public string Description {get; set;}
         [Required]
-        public required string  Department {get; set;}
+        public DateTime StartDate {get; set;}
         [Required]
-        public required string Team {get; set;}
+        public DateTime EndDate {get; set;}
         [Required]
-        public required string Manager {get; set;}
+        public required StatusEnum StatusId {get; set;}
         [Required]
-        public int NumberOfMembers {get; set;}
+        public required PriorityEnum PriorityId {get; set;}
+        public float Budget {get; set;}
         public DateTime CreateDate { get; set; }
+        public int CreateUser { get; set;}
         public DateTime LastUpdateDate { get; set; }
         public bool IsDeleted { get; set; } = false;
         public DateTime? DeleteDate { get; set; }
