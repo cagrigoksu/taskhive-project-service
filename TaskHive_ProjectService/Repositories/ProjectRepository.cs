@@ -13,13 +13,20 @@ public class ProjectRepository : IProjectRepository
         _db = db;
     }
 
-    public void AddProject(ProjectDataModel project){
-        
+    public async Task<ProjectDataModel> CreateProjectAsync(ProjectDataModel project)
+    {
+        project.CreateDate = DateTime.Now;
+        project.LastUpdateDate = DateTime.Now;
+
+        _db.Add(project);
+        await _db.SaveChangesAsync();
+
+        return project;        
     }
 
-    public async Task<List<ProjectDataModel>> GetProjectListAsync()
+    public async Task<List<ProjectDataModel>> GetProjectsAsync()
     {
-        var projectList = await _db.Projects.ToListAsync();
+        var projectList = await _db.Projects.OrderByDescending(x => x.CreateDate).ToListAsync();
         return projectList;
     }
 }
