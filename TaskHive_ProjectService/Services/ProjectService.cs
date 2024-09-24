@@ -13,14 +13,24 @@ public class ProjectService : IProjectService
         _projectRepository = projectRepository;
     }
 
-    public void AddProject(ProjectDataModel project)
+    public async Task<ProjectDataModel> CreateProjectAsync(ProjectDataModel project)
     {
-        _projectRepository.AddProject(project);
+        return await _projectRepository.CreateProjectAsync(project);
     }
 
-    public async Task<List<ProjectDataModel>> GetProjectListAsync()
+    public async Task<List<ProjectDataModel>> GetProjectsAsync()
     {
-        var projectList = await _projectRepository.GetProjectListAsync();
+        var projectList = await _projectRepository.GetProjectsAsync();
         return projectList;
+    }
+
+    public async Task<ProjectDataModel> GetProjectByIdAsync(int projectId)
+    {
+        return await _projectRepository.GetProjectByIdAsync(projectId);
+    }
+
+    public async Task<ProjectDataModel> EditProjectAsync(ProjectDataModel project)
+    {
+        return await _projectRepository.EditProjectAsync(project);
     }
 }

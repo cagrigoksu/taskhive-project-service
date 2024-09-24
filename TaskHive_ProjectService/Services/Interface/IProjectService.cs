@@ -4,6 +4,8 @@ namespace TaskHive_ProjectService.Services.Interface;
 
 public interface IProjectService
 {
-    Task<List<ProjectDataModel>> GetProjectListAsync();
-    void AddProject(ProjectDataModel project);
+    Task<List<ProjectDataModel>> GetProjectsAsync();
+    Task<ProjectDataModel> GetProjectByIdAsync(int projectId);
+    Task<ProjectDataModel> CreateProjectAsync(ProjectDataModel project);
+    Task<ProjectDataModel> EditProjectAsync(ProjectDataModel project);
 }
