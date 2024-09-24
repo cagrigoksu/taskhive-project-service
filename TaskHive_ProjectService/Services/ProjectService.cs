@@ -23,4 +23,14 @@ public class ProjectService : IProjectService
         var projectList = await _projectRepository.GetProjectsAsync();
         return projectList;
     }
+
+    public async Task<ProjectDataModel> GetProjectByIdAsync(int projectId)
+    {
+        return await _projectRepository.GetProjectByIdAsync(projectId);
+    }
+
+    public async Task<ProjectDataModel> EditProjectAsync(ProjectDataModel project)
+    {
+        return await _projectRepository.EditProjectAsync(project);
+    }
 }
