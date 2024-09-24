@@ -20,13 +20,6 @@ namespace TaskHive_ProjectService.Controllers{
             _projectService = projectService;
         }
 
-        [HttpGet("get-projects")]
-        public async Task<IActionResult> GetProjectsAsync()
-        {
-            var projectList = await _projectService.GetProjectsAsync();
-            return Ok(projectList);
-        }
-
         [HttpPost("create-project")]
         public async Task<IActionResult> CreateProjectAsync(ProjectDataModel project)
         {
@@ -39,25 +32,20 @@ namespace TaskHive_ProjectService.Controllers{
             return BadRequest();
         }
 
-        [HttpGet("get-status-enum")]
-        public async Task<IActionResult> GetStatusEnum()
+        [HttpPut("edit-project")]
+        public async Task<IActionResult> EditProjectAsync(ProjectDataModel project)
         {
-            var result = Enum.GetValues(typeof(StatusEnum))
-                    .Cast<StatusEnum>()
-                    .Select(e => new {
-                        id = (int)e, // enum id
-                        value = e.ToString() // enum value
-                    }).ToList();
+            var result = await _projectService.EditProjectAsync(project);
 
             if (result != null)
             {
-                return Ok(result); // Return the custom JSON structure
+                return Ok(result);
             }
             return BadRequest();
         }
 
         [HttpGet("get-priority-enum")]
-        public async Task<IActionResult> GetPriorityEnum()
+        public IActionResult GetPriorityEnum()
         {
             var result = Enum.GetValues(typeof(PriorityEnum))
                     .Cast<PriorityEnum>()
@@ -73,6 +61,44 @@ namespace TaskHive_ProjectService.Controllers{
             return BadRequest();
         }
 
+        [HttpGet("get-project-by-id/{projectId}")]
+        public async Task<IActionResult> GetProjectByIdAsync(int projectId)
+        {
+            var project = await _projectService.GetProjectByIdAsync(projectId);
+            if (project != null)
+            {
+                return Ok(project); 
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("get-projects")]
+        public async Task<IActionResult> GetProjectsAsync()
+        {
+            var projectList = await _projectService.GetProjectsAsync();
+            if (projectList != null)
+            {
+                return Ok(projectList);
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("get-status-enum")]
+        public IActionResult GetStatusEnum()
+        {
+            var result = Enum.GetValues(typeof(StatusEnum))
+                    .Cast<StatusEnum>()
+                    .Select(e => new {
+                        id = (int)e, // enum id
+                        value = e.ToString() // enum value
+                    }).ToList();
+
+            if (result != null)
+            {
+                return Ok(result); // Return the custom JSON structure
+            }
+            return BadRequest();
+        }
 
     }
 }
